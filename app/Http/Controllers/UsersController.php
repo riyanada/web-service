@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Profile;
+
 class UsersController extends Controller
 {
     private $users;
@@ -16,20 +19,33 @@ class UsersController extends Controller
         ];
     }
 
-    public function index($id = null)
+    public function index()
     {
-        return response()->json($this->users);
+        $users = User::all();
+
+        if ($users->isEmpty()) {
+            return response()->json(['message' => 'No users found'], 404);
+        }
+
+        return response()->json(['users' => $users], 200);
     }
 
     public function show($id)
     {
-        $user = $this->findUserById($id);
+        $profile = Profile::with('user')->where('user_id', $id)->first();
 
-        if ($user) {
-            return response()->json(['user' => $user]);
-        } else {
-            return response()->json(['message' => 'User tidak ditemukan'], 404);
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
         }
+
+        $user = $profile->user;
+
+        $responseData = [
+            'user' => $user ? $user->toArray() : null,
+            'profile' => $profile->toArray(),
+        ];
+
+        return response()->json($responseData, 200);
     }
 
     private function findUserById($id)

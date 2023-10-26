@@ -19,7 +19,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name',
+        'email',
+        'password',
+        'roles',
+        'address',
+        'city_id',
+        'province_id',
+        'phone',
+        'avatar',
+        'status',
+        'api_token',
     ];
 
     /**
@@ -28,6 +38,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+        return $this->api_token;
+    }
 }

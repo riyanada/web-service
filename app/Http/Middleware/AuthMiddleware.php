@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\User;
 
 class AuthMiddleware
 {
@@ -13,7 +14,6 @@ class AuthMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-
     public function handle($request, Closure $next)
     {
         $authorizationHeader = $request->header('Authorization');
@@ -23,15 +23,23 @@ class AuthMiddleware
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        if (!$this->isValidToken($token)) {
+        $user = User::where('api_token', $token)->first();
+
+        if (!$user) {
             return response()->json(['message' => 'Invalid token'], 401);
         }
+
+        if (!$this->isValidToken($token, $user)) {
+            return response()->json(['message' => 'Invalid token'], 401);
+        }
+
+        $request->merge(['user' => $user]);
 
         return $next($request);
     }
 
-    private function isValidToken($token)
+    private function isValidToken($token, $user)
     {
-        return $token === 'YIo6abISPQq56tJhH6LtD7kIE2ZXacjRvjbLGzbXZHE';
+        return $token === $user->api_token;
     }
 }

@@ -36,4 +36,7 @@ $router->post('/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/users', 'UsersController@index');
     $router->get('/users/{id}', 'UsersController@show');
+    $router->get('posts', 'PostsController@index');
+    $router->get('category', 'CategoryController@index');
+    $router->get('role', 'RoleController@index');
 });
