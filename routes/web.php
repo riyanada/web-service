@@ -36,7 +36,13 @@ $router->post('/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/users', 'UsersController@index');
     $router->get('/users/{id}', 'UsersController@show');
-    $router->get('posts', 'PostsController@index');
     $router->get('category', 'CategoryController@index');
     $router->get('role', 'RoleController@index');
+
+    //master Posts
+    $router->get('posts', 'PostsController@index');
+    $router->post('posts', 'PostsController@store');
+    $router->get('post/{id}', 'PostsController@show');
+    $router->put('post/{id}', 'PostsController@update');
+    $router->delete('post/{id}', 'PostsController@destroy');
 });
