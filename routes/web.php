@@ -36,7 +36,6 @@ $router->post('/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/users', 'UsersController@index');
     $router->get('/users/{id}', 'UsersController@show');
-    $router->get('category', 'CategoryController@index');
     $router->get('role', 'RoleController@index');
 
     //master Posts
@@ -45,4 +44,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('post/{id}', 'PostsController@show');
     $router->put('post/{id}', 'PostsController@update');
     $router->delete('post/{id}', 'PostsController@destroy');
+
+    //master Category
+    $router->get('categories', 'CategoryController@index');
+    $router->post('categories', 'CategoryController@store'); 
+    $router->get('categories/{id}', 'CategoryController@show'); // <-- running on jobs
+    $router->put('categories/{id}', 'CategoryController@update'); // <-- running on jobs
 });
