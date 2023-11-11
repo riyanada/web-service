@@ -1,5 +1,5 @@
 # Project: Lumen Service App
-Tugas 5 - Web Service
+Tugas 6 - Web Service
 
 ## Installation
 ### Git Clone
