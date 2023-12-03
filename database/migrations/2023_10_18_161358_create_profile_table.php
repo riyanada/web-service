@@ -21,8 +21,8 @@ class CreateProfileTable extends Migration
             $table->string('tempat_lahir');
             $table->string('tgl_lahir');
             $table->longText('bio');
-            $table->string('pp');
-            $table->unsignedBigInteger('users_id');
+            $table->string('pp')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

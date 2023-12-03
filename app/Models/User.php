@@ -29,7 +29,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'phone',
         'avatar',
         'status',
-        'api_token',
     ];
 
     /**
@@ -38,7 +37,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password',
+        'api_token'
     ];
 
     public function generateToken()

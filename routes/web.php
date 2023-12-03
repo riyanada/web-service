@@ -44,6 +44,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('post/{id}', 'PostsController@show');
     $router->put('post/{id}', 'PostsController@update');
     $router->delete('post/{id}', 'PostsController@destroy');
+    $router->get('post/{id}/comments', 'CommentsController@comments');
+    $router->post('post/{id}/comments', 'CommentsController@commentStore');
+    $router->delete('post/{id}/comments/{commentId}', 'CommentsController@commentDestroy');
 
     //master Category
     $router->get('categories', 'CategoryController@index');

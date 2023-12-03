@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UsersEnrolmentsSeeder extends Seeder
+class UsersEnrolementsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,6 +20,6 @@ class UsersEnrolmentsSeeder extends Seeder
                 'roles_id' => '1',
             ],
         );
-        DB::table('users_enrolments')->insert($enrol);
+        DB::table('users_enrolements')->insert($enrol);
     }
 }

@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PostsSeeder::Class);
         $this->call(ProfileSeeder::Class);
         $this->call(RolesSeeder::Class);
-        $this->call(UsersEnrolmentsSeeder::Class);
+        $this->call(UsersEnrolementsSeeder::Class);
     }
 }
