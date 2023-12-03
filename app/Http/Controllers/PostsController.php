@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Post;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::OrderBy("id", "DESC")->paginate(10);
+        $posts = Post::OrderBy("id", "DESC")->paginate(2)->toArray();
 
-        $outPut = [
-            "message" => "posts",
-            "result" => $posts
+        $response = [
+            "total_count" => $posts["total"],
+            "limit" => $posts["per_page"],
+            "pagination" => [
+                "next_page" => $posts["next_page_url"],
+                "current_page" => $posts["current_page"]
+            ],
+            "data" => $posts["data"],
         ];
 
-        return response()->json($posts, 200);
+        return response()->json($response, 200);
     }
 
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
+        $input = $request->all();
+        $validationRules = [
+            'title' => 'required|min:5',
+            'content' => 'required|min:10',
+            'status' => 'required|in:draft, published',
+            'user_id' => 'required|exists:users,id'
+        ];
+
+        $validator = \Validator::make($input, $validationRules);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $post = Post::create($input);
         return response()->json($post, 200);
     }
 
@@ -46,6 +64,19 @@ class PostsController extends Controller
             abort(404);
         }
 
+        $validationRules = [
+            'title' => 'required|min:5',
+            'content' => 'required|min:10',
+            'status' => 'required|in:draft, published',
+            'user_id' => 'required|exists:users,id'
+        ];
+
+        $validator = \Validator::make($input, $validationRules);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         $post->fill($input);
         $post->save();
 
@@ -55,13 +86,14 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        if(!$post){
+        if (!$post) {
             abort(404);
         }
 
         $post->delete();
         $message = [
-            "message"=> "Deleted SUccessfully", 'post_id' => $id
+            "message" => "Deleted SUccessfully",
+            'post_id' => $id
         ];
 
         return response()->json($message, 200);
