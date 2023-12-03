@@ -3,27 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Post;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::OrderBy("id", "DESC")->paginate(10);
+        $acceptHeader = $request->header('Accept');
 
-        $outPut = [
-            "message" => "posts",
-            "result" => $posts
-        ];
+        if ($acceptHeader === 'application/json') {
 
-        return response()->json($posts, 200);
+            $posts = Post::OrderBy("id", "DESC")->paginate(10);
+
+            $outPut = [
+                "message" => "posts",
+                "result" => $posts
+            ];
+
+            return response()->json($posts, 200);
+        } else {
+            return response('Not Acceptable!', 406);
+        }
     }
 
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
-        return response()->json($post, 200);
+        $acceptHeader = $request->header('Accept');
+
+        if ($acceptHeader === 'application/json') {
+            $contentTypeHeader = $request->header('Content-Type');
+
+            if ($contentTypeHeader === 'application/json') {
+                $post = Post::create($request->all());
+                return response()->json($post, 200);
+            } else {
+                return response('Unsupported Media Type', 415);
+            }
+        } else {
+            return response('Not Acceptable!', 406);
+        }
     }
 
     public function show($id)
@@ -55,13 +73,14 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        if(!$post){
+        if (!$post) {
             abort(404);
         }
 
         $post->delete();
         $message = [
-            "message"=> "Deleted SUccessfully", 'post_id' => $id
+            "message" => "Deleted SUccessfully",
+            'post_id' => $id
         ];
 
         return response()->json($message, 200);
