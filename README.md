@@ -23,6 +23,18 @@ git clone -b tugas-5 https://github.com/riyanada/web-service.git
 ```sh
 git clone -b tugas-6 https://github.com/riyanada/web-service.git
 ```
+### Tugas 7
+```sh
+git clone -b tugas-7 https://github.com/riyanada/web-service.git
+```
+### Tugas 8
+```sh
+git clone -b tugas-8 https://github.com/riyanada/web-service.git
+```
+### Tugas 9
+```sh
+git clone -b tugas-9 https://github.com/riyanada/web-service.git
+```
 
 ## Link deploy
 
