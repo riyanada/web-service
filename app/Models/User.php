@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use Authenticatable, Authorizable, HasFactory;
 
@@ -22,12 +24,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'name',
         'email',
         'password',
-        'roles',
-        'address',
-        'city_id',
-        'province_id',
-        'phone',
-        'avatar',
         'status',
         'api_token',
     ];
@@ -41,10 +37,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password'
     ];
 
-    public function generateToken()
+    public function getJWTIdentifier()
     {
-        $this->api_token = Str::random(60);
-        $this->save();
-        return $this->api_token;
+        return $this->getkey();
     }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    // public function generateToken()
+    // {
+    //     $this->api_token = Str::random(60);
+    //     $this->save();
+    //     return $this->api_token;
+    // }
 }

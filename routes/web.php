@@ -21,18 +21,27 @@ $router->get('/', function () {
     return response()->json(['service_name' => 'PHP Service App', 'status' => 'Running']);
 });
 
-$router->get('/hello-lumen/{name}', function ($name) {
-    return "<h1>Lumen</h1><p>Hi " . $name . ", Thans for using Lumen</p>";
+// $router->get('/hello-lumen/{name}', function ($name) {
+//     return "<h1>Lumen</h1><p>Hi " . $name . ", Thans for using Lumen</p>";
+// });
+
+// $router->get('/scores', [
+//     'middleware' => 'login',
+//     function () {
+//         return "<h1>Selamat</h1><p>Hi Nilai anda 100</p>";
+//     }
+// ]);
+
+$router->group(['prefix' => 'public', 'namespace' => 'Publish',], function () use ($router) {
+    $router->get('posts', 'PostsController@index');
+    $router->get('post/{id}', 'PostsController@show');
 });
 
-$router->get('/scores', [
-    'middleware' => 'login',
-    function () {
-        return "<h1>Selamat</h1><p>Hi Nilai anda 100</p>";
-    }
-]);
+$router->group(['prefix' => 'auth'], function () use ($router) {
+    $router->post('/register', 'AuthController@register');
+    $router->post('/login', 'AuthController@login');
+});
 
-$router->post('/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/users', 'UsersController@index');
     $router->get('/users/{id}', 'UsersController@show');
@@ -47,7 +56,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
     //master Category
     $router->get('categories', 'CategoryController@index');
-    $router->post('categories', 'CategoryController@store'); 
+    $router->post('categories', 'CategoryController@store');
     $router->get('categories/{id}', 'CategoryController@show'); // <-- running on jobs
     $router->put('categories/{id}', 'CategoryController@update'); // <-- running on jobs
 });

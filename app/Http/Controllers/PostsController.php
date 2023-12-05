@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -9,7 +11,20 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::OrderBy("id", "DESC")->paginate(2)->toArray();
+        if (Gate::denies('read-post')) {
+            return response()->json([
+                'success' => false,
+                'status' => 403,
+                'message' => 'You are unauthorize'
+            ], 403);
+        }
+
+        if (Auth::user()->role === 'admin') {
+            $posts = Post::OrderBy("id", "DESC")->paginate(2)->toArray();
+        } else {
+            $posts = Post::Where(['user_id' => Auth::user()->id])->OrderBy("id", "DESC")->paginate(2)->toArray();
+        }
+
 
         $response = [
             "total_count" => $posts["total"],
@@ -62,6 +77,14 @@ class PostsController extends Controller
 
         if (!$post) {
             abort(404);
+        }
+
+        if (Gate::denies('update-post', $post)) {
+            return response()->json([
+                'success' => false,
+                'status' => 403,
+                'message' => 'You are unauthorize'
+            ], 403);
         }
 
         $validationRules = [
