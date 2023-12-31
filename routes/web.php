@@ -45,6 +45,12 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/users', 'UsersController@index');
     $router->get('/users/{id}', 'UsersController@show');
+
+    //profile
+    $router->post('profiles', 'ProfilesController@store');
+    $router->get('profiles/{userId}', 'ProfilesController@show');
+
+    //role
     $router->get('role', 'RoleController@index');
 
     //master Posts
