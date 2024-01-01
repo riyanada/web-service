@@ -11,16 +11,10 @@ class PostsController extends Controller
 {
     public function index()
     {
-        if (Gate::denies('read-post')) {
-            return response()->json([
-                'success' => false,
-                'status' => 403,
-                'message' => 'You are unauthorize'
-            ], 403);
-        }
+        $this->authorize('view', Post::class);
 
         if (Auth::user()->role === 'admin') {
-            $posts = Post::OrderBy("id", "DESC")->paginate(2)->toArray();
+            $posts = Post::OrderBy("id", "DESC")->paginate(5)->toArray();
         } else {
             $posts = Post::Where(['user_id' => Auth::user()->id])->OrderBy("id", "DESC")->paginate(2)->toArray();
         }
@@ -41,12 +35,13 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
+
         $input = $request->all();
         $validationRules = [
             'title' => 'required|min:5',
             'content' => 'required|min:10',
-            'status' => 'required|in:draft, published',
-            'user_id' => 'required|exists:users,id'
+            'status' => 'required|in:draft, published'
         ];
 
         $validator = \Validator::make($input, $validationRules);
@@ -55,13 +50,16 @@ class PostsController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        $input['user_id'] = auth()->id();
         $post = Post::create($input);
+
         return response()->json($post, 200);
     }
 
     public function show($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('viewDetail', $post);
 
         if (!$post) {
             abort(404);
@@ -74,17 +72,10 @@ class PostsController extends Controller
         $input = $request->all();
 
         $post = Post::find($id);
+        $this->authorize('update', $post);
 
         if (!$post) {
             abort(404);
-        }
-
-        if (Gate::denies('update-post', $post)) {
-            return response()->json([
-                'success' => false,
-                'status' => 403,
-                'message' => 'You are unauthorize'
-            ], 403);
         }
 
         $validationRules = [
@@ -109,6 +100,8 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('delete', $post);
+
         if (!$post) {
             abort(404);
         }
