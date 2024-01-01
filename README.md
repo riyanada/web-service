@@ -1,9 +1,5 @@
 # Project: Lumen Service App
-<<<<<<< HEAD
-Tugas 12 - Web Service
-=======
-Tugas 10 - Web Service
->>>>>>> 335cfcaa886dc868ff2e740ca69a83c25980d994
+Tugas 11 - Web Service
 
 ## End-point: Getting Status
 ### Method: GET
