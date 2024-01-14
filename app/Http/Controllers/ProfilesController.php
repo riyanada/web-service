@@ -13,12 +13,24 @@ class ProfilesController extends Controller
 {
     public function show($userId)
     {
-        $profile = Profile::where('user_id', $userId)->first();
+        $profile = Profile::where('user_id', $userId)->with('user')->first();
         if (!$profile) {
             abort(404);
         }
         return response()->json($profile, 200);
     }
+
+    public function image($imageName)
+    {
+        $imagePath = storage_path('uploads/image_profile') . '/' . $imageName;
+        if (file_exists($imagePath)) {
+            $file = file_get_contents($imagePath);
+            return response($file, 200)->header('Content-Type', 'image/jpeg');
+        }
+
+        return response()->json(array("message" => "Image not Found", "path" => $imagePath), 401);
+    }
+
     public function store(Request $request)
     {
         $input = $request->all();
@@ -49,21 +61,22 @@ class ProfilesController extends Controller
 
         if ($request->hasFile('pp')) {
             $image = $request->file('pp');
-            $imageName = Auth::user()->id . '_' . $image->getClientOriginalName();
-            $imagePath = 'uploads/image_prof  ile/';
-
+            $imageName = Auth::user()->id . '_' . uniqid();
+            $imagePath = 'uploads/image_profile/';
+        
             // Pindahkan gambar ke direktori public
-            $image->move(base_path('public/' . $imagePath), $imageName);
-
+            $image->move(storage_path($imagePath), $imageName);
+        
             // Hapus gambar lama jika ada
             $profile = Profile::where('user_id', $profileData['user_id'])->first();
-            $current_image_path = base_path('public/' . $imagePath . $profile->pp);
+            $current_image_path = storage_path($imagePath . $profile->pp);
             if (file_exists($current_image_path)) {
                 unlink($current_image_path);
             }
-
+        
             $profileData['pp'] = $imageName;
         }
+        
 
         // Pastikan user dengan ID yang diberikan ada
         if (!User::find($profileData['user_id'])) {

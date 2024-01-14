@@ -1,18 +1,30 @@
 # Project: Lumen Service App
 Tugas 11 - Web Service
+# 📁 Collection: Auth - JWT 
 
-## End-point: Getting Status
-### Method: GET
+
+## End-point: Auth Register
+### Method: POST
 >```
->localhost:5000
+>localhost:5000/auth/register
 >```
+### Body formdata
+
+|Param|value|Type|
+|---|---|---|
+|name|Firts User|text|
+|email|email@gmail.com|text|
+|password|12345678|text|
+|password_confirmation|12345678|text|
+
+
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Login with JWT Token
+## End-point: Login Test
 ### Method: POST
 >```
->localhost:5000/login
+>localhost:5000/auth/login
 >```
 ### Body (**raw**)
 
@@ -25,145 +37,61 @@ Tugas 11 - Web Service
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get All Users
-### Method: GET
->```
->localhost:5000/users
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|huxnJH9RiYW0v2o9fZu3d1szJxi9m14s/LC0Nowiv1w=|string|
+# 📁 Collection: Tugas 11 
 
 
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Detail User
-### Method: GET
->```
->localhost:5000/users/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|PRsB2toYQlG4ACnP89qwB7KRBuoVI9UdbdDH5hSZtlU=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Posts
-### Method: GET
->```
->localhost:5000/posts
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Accept|application/json|
-
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|R81FMxv7y3SB/dRZlM/EQU9pQI50lmFfDuYjP7QwHVg=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Detail Post
-### Method: GET
->```
->localhost:5000/post/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Adding Post
+## End-point: Create Update Profile
 ### Method: POST
 >```
->localhost:5000/posts
+>localhost:5000/profiles
 >```
-### Headers
+### Body formdata
 
-|Content-Type|Value|
-|---|---|
-|Accept|application/json|
+|Param|value|Type|
+|---|---|---|
+|name|riyaada|text|
+|no_telp|89528989758|text|
+|alamat|Jl Cimahi|text|
+|tempat_lahir|Cimahi|text|
+|tgl_lahir|16-11-1998|text|
+|bio|mantap bgs|text|
+|pp|/C:/Users/riyanada/Downloads/1x1.jpg|file|
 
-
-### Body (**raw**)
-
-```json
-{
-    "title": "Cara membuat",
-    "status": "draft",
-    "content": "Bisa semuannya!",
-    "user_id": 1,
-    "categories_id": 1
-}
-```
 
 ### 🔑 Authentication bearer
 
 |Param|value|Type|
 |---|---|---|
-|token|R81FMxv7y3SB/dRZlM/EQU9pQI50lmFfDuYjP7QwHVg=|string|
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Update Post
-### Method: PUT
->```
->localhost:5000/post/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
+|token|{{accessToken}}|string|
 
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete Post
-### Method: DELETE
->```
->localhost:5000/post/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Public Posts
+## End-point: Get Profile
 ### Method: GET
 >```
->localhost:5000/public/posts
+>localhost:5000/profile/1
 >```
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|{{accessToken}}|string|
+
+
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-## End-point: Public Post Detail
+
+## End-point: Get Image
 ### Method: GET
 >```
->localhost:5000/public/post/{postID}
+>localhost:5000/profile/image/1_6592f819001d9
 >```
+### 🔑 Authentication bearer
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+|Param|value|Type|
+|---|---|---|
+|token|{{accessToken}}|string|
+
+
