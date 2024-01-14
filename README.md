@@ -2,6 +2,31 @@
 
 ## D112121062 -  Riyan
 
+## Project setup
+```
+composer install
+```
+
+### Database: Migrations
+
+```
+php artisan migrate
+```
+
+### Database: Seeding
+```
+php artisan db:seed
+```
+
+### Local Development Server
+```
+php artisan serve
+```
+or
+```
+php -S localhost:5000 -t public
+```
+
 ## Clone Repository 
 ### Tugas 2
 ```sh
@@ -34,6 +59,14 @@ git clone -b tugas-8 https://github.com/riyanada/web-service.git
 ### Tugas 9
 ```sh
 git clone -b tugas-9 https://github.com/riyanada/web-service.git
+```
+### Tugas 10
+```sh
+git clone -b tugas-10 https://github.com/riyanada/web-service.git
+```
+### Tugas 11
+```sh
+git clone -b tugas-11 https://github.com/riyanada/web-service.git
 ```
 
 ## Link deploy
