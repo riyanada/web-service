@@ -68,6 +68,10 @@ git clone -b tugas-10 https://github.com/riyanada/web-service.git
 ```sh
 git clone -b tugas-11 https://github.com/riyanada/web-service.git
 ```
+### Tugas 12
+```sh
+git clone -b tugas-12 https://github.com/riyanada/web-service.git
+```
 
 ## Link deploy
 
