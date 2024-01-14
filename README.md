@@ -1,39 +1,20 @@
 # Project: Lumen Service App
-Tugas 6 - Web Service
+# 📁 Collection: Auth - JWT 
 
-## End-point: Getting Status
-### Method: GET
+
+## End-point: Auth Register
+### Method: POST
 >```
->localhost:5000
+>localhost:5000/auth/register
 >```
-### 🔑 Authentication noauth
+### Body formdata
 
 |Param|value|Type|
 |---|---|---|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Hello-Lumen
-### Method: GET
->```
->localhost:5000/hello-lumen/riyan
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Scores
-### Method: GET
->```
->localhost:5000/scores/?username=tedc&password=rahasia
->```
-### Query Params
-
-|Param|value|
-|---|---|
-|username|tedc|
-|password|rahasia|
+|name|Firts User|text|
+|email|email@gmail.com|text|
+|password|12345678|text|
+|password_confirmation|12345678|text|
 
 
 
@@ -42,7 +23,7 @@ Tugas 6 - Web Service
 ## End-point: Login Test
 ### Method: POST
 >```
->localhost:5000/login
+>localhost:5000/auth/login
 >```
 ### Body (**raw**)
 
@@ -55,53 +36,8 @@ Tugas 6 - Web Service
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get All Users
-### Method: GET
->```
->localhost:5000/users
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|huxnJH9RiYW0v2o9fZu3d1szJxi9m14s/LC0Nowiv1w=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Detail User
-### Method: GET
->```
->localhost:5000/users/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|PRsB2toYQlG4ACnP89qwB7KRBuoVI9UdbdDH5hSZtlU=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Roles
-### Method: GET
->```
->localhost:5000/role
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|PRsB2toYQlG4ACnP89qwB7KRBuoVI9UdbdDH5hSZtlU=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Posts
+# 📁 Collection: Tugas 8 
+## End-point: Get All Posts
 ### Method: GET
 >```
 >localhost:5000/posts
@@ -117,7 +53,7 @@ Tugas 6 - Web Service
 
 |Param|value|Type|
 |---|---|---|
-|token|R81FMxv7y3SB/dRZlM/EQU9pQI50lmFfDuYjP7QwHVg=|string|
+|token|eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvYXV0aC9sb2dpbiIsImlhdCI6MTcwMzQwMzgwOCwiZXhwIjoxNzAzNDA3NDA4LCJuYmYiOjE3MDM0MDM4MDgsImp0aSI6InNoSmFYV0NNSlRpWFl6NzAiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.vr4uodfMjrJzT95eagVsBXWZCEfraGqCX4aPwuI_IFI|string|
 
 
 
@@ -132,52 +68,7 @@ Tugas 6 - Web Service
 
 |Param|value|Type|
 |---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Category
-### Method: GET
->```
->localhost:5000/categories
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|7ldfxSUcYR414UZQUKlzh1awyYYJk1LcrNV9va7RT+A=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Detail Category
-### Method: GET
->```
->localhost:5000/post/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Comments Post
-### Method: GET
->```
->localhost:5000/post/{id}/comments
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
+|token|eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvYXV0aC9sb2dpbiIsImlhdCI6MTcwMzQwODU2OSwiZXhwIjoxNzAzNDEyMTY5LCJuYmYiOjE3MDM0MDg1NjksImp0aSI6IjdsSWFMRU9UMVpsTThoWFYiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.m48O3BKtWTb3h49RddH566yXeenUwS0JkKbNx7jTv3o|string|
 
 
 
@@ -199,7 +90,33 @@ Tugas 6 - Web Service
 
 ```json
 {
-    "title": "Cara membuat",
+    "title": "Cara membuat5",
+    "status": "draft",
+    "content": "Bisa semuannya!",
+    "categories_id": 1
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvYXV0aC9sb2dpbiIsImlhdCI6MTcwMzQwODU2OSwiZXhwIjoxNzAzNDEyMTY5LCJuYmYiOjE3MDM0MDg1NjksImp0aSI6IjdsSWFMRU9UMVpsTThoWFYiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.m48O3BKtWTb3h49RddH566yXeenUwS0JkKbNx7jTv3o|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Update Post
+### Method: PUT
+>```
+>localhost:5000/post/1
+>```
+### Body (**raw**)
+
+```json
+{
+    "title": "",
     "status": "draft",
     "content": "Bisa semuannya!",
     "user_id": 1,
@@ -217,71 +134,6 @@ Tugas 6 - Web Service
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Adding Comment Post
-### Method: POST
->```
->localhost:5000/post{id}/comments
->```
-### Body formdata
-
-|Param|value|Type|
-|---|---|---|
-|title|Test Titile|text|
-|content|Content Test|text|
-|status|published|text|
-|user_id|1|text|
-
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|P5UXL6frxZtM0r2hJoqmZD56SZqjnEEVkuzVik3XXXk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Adding Category
-### Method: POST
->```
->localhost:5000/posts
->```
-### Body formdata
-
-|Param|value|Type|
-|---|---|---|
-|title|Test Titile|text|
-|content|Content Test|text|
-|status|published|text|
-|user_id|1|text|
-
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|P5UXL6frxZtM0r2hJoqmZD56SZqjnEEVkuzVik3XXXk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Update Post
-### Method: PUT
->```
->localhost:5000/post/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
 ## End-point: Delete Post
 ### Method: DELETE
 >```
@@ -292,22 +144,3 @@ Tugas 6 - Web Service
 |Param|value|Type|
 |---|---|---|
 |token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Delete Comment Post
-### Method: DELETE
->```
->localhost:5000/post/{id}/comments/{commentId}
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|eua5XmIVCL4dlEuZT/ZX9pfXTqllJvtg9DcASUEfggk=|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
