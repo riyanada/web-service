@@ -2,116 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use App\Models\Post;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function getRequestJson(Request $request)
     {
-        $this->authorize('view', Post::class);
+        $url = 'http://localhost:5000/public/posts';
+        $headers = ['Accept: application/json'];
 
-        if (Auth::user()->role === 'admin') {
-            $posts = Post::OrderBy("id", "DESC")->paginate(5)->toArray();
-        } else {
-            $posts = Post::Where(['user_id' => Auth::user()->id])->OrderBy("id", "DESC")->paginate(2)->toArray();
-        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
+        $result = curl_exec($ch);
+        $response = json_decode($result);
+        $data = $response->data;
 
-        $response = [
-            "total_count" => $posts["total"],
-            "limit" => $posts["per_page"],
-            "pagination" => [
-                "next_page" => $posts["next_page_url"],
-                "current_page" => $posts["current_page"]
-            ],
-            "data" => $posts["data"],
-        ];
-
-        return response()->json($response, 200);
+        return view('posts/getRequestJson', ['results' => $data]);
     }
 
-    public function store(Request $request)
+    public function getRequestXml(Request $request)
     {
-        $this->authorize('create', Post::class);
+        $url = 'http://localhost:5000/public/posts';
+        $headers = ['Accept: application/json'];
 
-        $input = $request->all();
-        $validationRules = [
-            'title' => 'required|min:5',
-            'content' => 'required|min:10',
-            'status' => 'required|in:draft, published'
-        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $validator = \Validator::make($input, $validationRules);
+        $result = curl_exec($ch);
+        $response = json_decode($result);
+        $data = $response->data;
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $input['user_id'] = auth()->id();
-        $post = Post::create($input);
-
-        return response()->json($post, 200);
+        return view('posts/getRequestJson', ['results' => $data]);
     }
 
-    public function show($id)
+    public function postRequestJson(Request $request)
     {
-        $post = Post::findOrFail($id);
-        $this->authorize('viewDetail', $post);
+        $url = 'http://localhost:5000/posts';
+        $headers = ['Accept: application/json', 'Content-Type: application/json'];
+        $data = array(
+            "title" => "Ini adalah title",
+            "content" => "Ini adalah Content",
+            "status" => "draft",
+            "categories_id" => 3,
+            "user_id" => 1
+        );
+        $dataJSON = json_encode($data);
 
-        if (!$post) {
-            abort(404);
-        }
-        return response()->json($post, 200);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJSON);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($result, true);
+
+        return view('posts/postRequestJson', ['result' => $response]);
     }
 
-    public function update(Request $request, $id)
+    public function postRequestXml(Request $request)
     {
-        $input = $request->all();
+        $url = 'http://localhost:5000/posts';
+        $headers = ['Accept: application/json', 'Content-Type: application/json'];
+        $data = array(
+            "title" => "Ini adalah title",
+            "content" => "Ini adalah Content",
+            "status" => "draft",
+            "categories_id" => 3,
+            "user_id" => 1
+        );
+        $dataJSON = json_encode($data);
 
-        $post = Post::find($id);
-        $this->authorize('update', $post);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJSON);
 
-        if (!$post) {
-            abort(404);
-        }
+        $result = curl_exec($ch);
+        curl_close($ch);
 
-        $validationRules = [
-            'title' => 'required|min:5',
-            'content' => 'required|min:10',
-            'status' => 'required|in:draft, published',
-            'user_id' => 'required|exists:users,id'
-        ];
+        $response = json_decode($result, true);
 
-        $validator = \Validator::make($input, $validationRules);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $post->fill($input);
-        $post->save();
-
-        return response()->json($post, 200);
-    }
-
-    public function destroy($id)
-    {
-        $post = Post::findOrFail($id);
-        $this->authorize('delete', $post);
-
-        if (!$post) {
-            abort(404);
-        }
-
-        $post->delete();
-        $message = [
-            "message" => "Deleted SUccessfully",
-            'post_id' => $id
-        ];
-
-        return response()->json($message, 200);
+        return view('posts/postRequestJson', ['result' => $response]);
     }
 }
