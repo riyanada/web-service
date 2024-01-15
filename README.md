@@ -1,43 +1,42 @@
 # Project: Lumen Client App
-# 📁 Collection: Tugas 12 
+# 📁 Collection: Tugas 14 
 
 ## Project setup
-### Clone Tugas 11
+### Clone Branch
 ```sh
-git clone -b tugas-11 https://github.com/riyanada/web-service.git
+git clone -b tugas-14 https://github.com/riyanada/web-service.git
 ```
-
-```
-composer install
-```
-
-### Database: Migrations
-
-```
-php artisan migrate
-```
-
-### Database: Seeding
-```
-php artisan db:seed
-```
-
 ### Local Development Server
 ```
-php -S localhost:5000 -t public
+php -S localhost:8000 -t public
+```
+or
+```
+php artisan serve
 ```
 
-## End-point: Get Posts
-### Method: POST
+## List
 >```
->localhost:5000/public/posts
+>localhost:8000/employee
+>```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+## Create
+>```
+>localhost:8000/employee/create
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Add Posts
-### Method: GET
+## Detail
 >```
->localhost:5000/posts
+>localhost:8000/employee/detail/{id}
 >```
 
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+## Edit
+>```
+>localhost:8000/employee/change/{id}
+>```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃

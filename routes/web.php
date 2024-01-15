@@ -17,7 +17,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/posts/get-request-json', 'PostsController@getRequestJson');
-$router->get('/posts/get-request-xml', 'PostsController@getRequestXml');
-$router->get('/posts/post-request-json', 'PostsController@postRequestJson');
-$router->get('/posts/post-request-xml', 'PostsController@postRequestXml');
+$router->get('employee', 'PostsController@index');
+$router->get('employee/detail/{id}', 'PostsController@show');
+$router->get('employee/create', 'PostsController@create');
+$router->get('employee/change/{id}', 'PostsController@change');
+$router->post('employee', 'PostsController@store');

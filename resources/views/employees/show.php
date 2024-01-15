@@ -10,49 +10,37 @@
 
 <body>
     <div class="container">
-        <h1>List Post</h1>
+        <h1>Detail Employee</h1>
         <table class="table table-striped">
             <tbody>
                 <tr>
                     <td>ID</td>
                     <td>
-                        <?= $result['id'] ?>
+                        <?= $result->id ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>User ID</td>
+                    <td>Name </td>
                     <td>
-                        <?= $result['user_id'] ?>
+                        <?= $result->employee_name ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Title</td>
+                    <td>Salary</td>
                     <td>
-                        <?= $result['title'] ?>
+                        <?= $result->employee_salary ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Content</td>
+                    <td>Age</td>
                     <td>
-                        <?= $result['content'] ?>
+                        <?= $result->employee_age ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Status</td>
+                    <td>Image</td>
                     <td>
-                        <?= $result['status'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Created At</td>
-                    <td>
-                        <?= $result['created_at'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Update At</td>
-                    <td>
-                        <?= $result['updated_at'] ?>
+                        <?= $result->profile_image ?>
                     </td>
                 </tr>
             </tbody>
