@@ -9,6 +9,53 @@ use App\Models\Post;
 
 class PostsController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/posts",
+     *     summary="Get a list of posts",
+     *     tags={"Posts"},
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="total_count", type="integer"),
+     *             @OA\Property(property="limit", type="integer"),
+     *             @OA\Property(property="pagination", type="object",
+     *                 @OA\Property(property="next_page", type="string"),
+     *                 @OA\Property(property="current_page", type="integer"),
+     *             ),
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(
+     *                     @OA\Property(property="id", type="integer"),
+     *                     @OA\Property(property="user_id", type="integer"),
+     *                     @OA\Property(property="title", type="string"),
+     *                     @OA\Property(property="content", type="string"),
+     *                     @OA\Property(property="status", type="string"),
+     *                     @OA\Property(property="created_at", type="string", format="date-time"),
+     *                     @OA\Property(property="updated_at", type="string", format="date-time"),
+     *                 )
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden - User does not have permission",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     * )
+     */
     public function index()
     {
         $this->authorize('view', Post::class);
@@ -33,9 +80,57 @@ class PostsController extends Controller
         return response()->json($response, 200);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/posts",
+     *     summary="Create a new post",
+     *     tags={"Posts"},
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Post data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Sample Title"),
+     *             @OA\Property(property="content", type="string", example="Sample Content"),
+     *             @OA\Property(property="status", type="string", enum={"published", "draft"}, example="published"),
+     *             @OA\Property(property="user_id", type="integer", format="int64", example=1),
+     *             @OA\Property(property="categories_id", type="integer", format="int64", example=1),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Post created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer", format="int64"),
+     *             @OA\Property(property="user_id", type="integer", format="int64"),
+     *             @OA\Property(property="title", type="string"),
+     *             @OA\Property(property="content", type="string"),
+     *             @OA\Property(property="status", type="string"),
+     *             @OA\Property(property="created_at", type="string", format="date-time"),
+     *             @OA\Property(property="updated_at", type="string", format="date-time"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden - User does not have permission",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     * )
+     */
     public function store(Request $request)
     {
-        // $this->authorize('create', Post::class);
+        $this->authorize('create', Post::class);
 
         $input = $request->all();
         $validationRules = [
@@ -56,6 +151,53 @@ class PostsController extends Controller
         return response()->json($post, 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/post/{id}",
+     *     summary="Get details of a specific post",
+     *     tags={"Posts"},
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the post",
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Post details retrieved successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer", format="int64"),
+     *             @OA\Property(property="user_id", type="integer", format="int64"),
+     *             @OA\Property(property="title", type="string"),
+     *             @OA\Property(property="content", type="string"),
+     *             @OA\Property(property="status", type="string"),
+     *             @OA\Property(property="created_at", type="string", format="date-time"),
+     *             @OA\Property(property="updated_at", type="string", format="date-time"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Post not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden - User does not have permission",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     * )
+     */
     public function show($id)
     {
         $post = Post::findOrFail($id);
@@ -67,6 +209,70 @@ class PostsController extends Controller
         return response()->json($post, 200);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/post/{id}",
+     *     summary="Update a specific post",
+     *     tags={"Posts"},
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the post",
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Post data to update",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string"),
+     *             @OA\Property(property="content", type="string"),
+     *             @OA\Property(property="status", type="string"),
+     *             @OA\Property(property="user_id", type="integer"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Post updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer", format="int64"),
+     *             @OA\Property(property="user_id", type="integer", format="int64"),
+     *             @OA\Property(property="title", type="string"),
+     *             @OA\Property(property="content", type="string"),
+     *             @OA\Property(property="status", type="string"),
+     *             @OA\Property(property="created_at", type="string", format="date-time"),
+     *             @OA\Property(property="updated_at", type="string", format="date-time"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Post not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden - User does not have permission",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request - Validation errors",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     * )
+     */
     public function update(Request $request, $id)
     {
         $input = $request->all();
@@ -97,6 +303,48 @@ class PostsController extends Controller
         return response()->json($post, 200);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/post/{id}",
+     *     summary="Delete a specific post",
+     *     tags={"Posts"},
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the post",
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Post deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string"),
+     *             @OA\Property(property="post_id", type="integer", format="int64"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Post not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden - User does not have permission",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string"),
+     *         )
+     *     ),
+     * )
+     */
     public function destroy($id)
     {
         $post = Post::findOrFail($id);

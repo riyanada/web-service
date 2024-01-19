@@ -50,8 +50,6 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -64,6 +62,7 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 */
 
 $app->configure('app');
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -101,8 +100,9 @@ $app->routeMiddleware([
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
+$app->register(\SwaggerLume\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
